@@ -14,20 +14,20 @@ def main():
 def upload():
     if request.method == 'POST':
         print(request)
-        data = request.data
-        filename = json.loads(data)['food']
-        print(filename)
+        data = request.form['data']
+        print(data)
         visual_recognition = VisualRecognitionV3(
             '2018-03-19',
             iam_apikey='PDH9x2MwWgNl0BJfIuDO5VuOfNaqNAxyawnvFNc_YFNr')
 
-        with open(filename, 'rb') as images_file:
+        with open(data, 'rb') as images_file:
             classes = visual_recognition.classify(
                 images_file,
                 threshold='0.6',
         	classifier_ids='DefaultCustomModel_267056391').get_result()
         print(json.dumps(classes, indent=2))
         return (json.dumps(classes, indent=2))
+        return("accept")
 
     else:
         return("error")
