@@ -14,7 +14,7 @@ def main():
 def upload():
     if request.method == 'POST':
         print(request)
-        file = request.files['food']
+        file = request.form['food']
         print(file)
 
         print("call watson")
