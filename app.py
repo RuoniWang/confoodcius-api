@@ -14,15 +14,14 @@ def main():
 def upload():
     if request.method == 'POST':
         print(request)
-        file = request.form['food']
-        print(file)
-
-        print("call watson")
+        data = request.data
+        filename = json.loads(data)['food']
+        print(filename)
         visual_recognition = VisualRecognitionV3(
             '2018-03-19',
             iam_apikey='PDH9x2MwWgNl0BJfIuDO5VuOfNaqNAxyawnvFNc_YFNr')
 
-        with open(file, 'rb') as images_file:
+        with open(filename, 'rb') as images_file:
             classes = visual_recognition.classify(
                 images_file,
                 threshold='0.6',
