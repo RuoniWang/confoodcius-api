@@ -16,9 +16,9 @@ def main():
 @app.route('/upload', methods=['POST'])
 def upload():
     if request.method == 'POST':
-        print(request)
+
         base64data = request.form['data']
-        print(base64data)
+
 
         imgdata = base64.b64decode(base64data)
         filename = 'some_image.jpg'  # I assume you have a way of picking unique filenames
@@ -34,8 +34,8 @@ def upload():
                 images_file,
                 threshold='0.6',
         	classifier_ids='DefaultCustomModel_267056391').get_result()
-        print(json.dumps(classes, indent=2))
-        return (json.dumps(classes, indent=2))
+
+        return (json.dumps(classes))
 
     else:
         return("error")
