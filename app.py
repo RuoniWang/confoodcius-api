@@ -1,6 +1,9 @@
 from flask import Flask
 from flask import request
 from watson_developer_cloud import VisualRecognitionV3
+import base64
+
+
 
 import json
 
@@ -14,20 +17,25 @@ def main():
 def upload():
     if request.method == 'POST':
         print(request)
-        data = request.form['data']
-        print(data)
+        base64data = request.form['data']
+        print(base64data)
+
+        imgdata = base64.b64decode(base64data)
+        filename = 'some_image.jpg'  # I assume you have a way of picking unique filenames
+        with open(filename, 'wb') as f:
+            f.write(imgdata)
+
         visual_recognition = VisualRecognitionV3(
             '2018-03-19',
             iam_apikey='PDH9x2MwWgNl0BJfIuDO5VuOfNaqNAxyawnvFNc_YFNr')
 
-        with open(data, 'rb') as images_file:
+        with open('some_image.jpg', 'rb') as images_file:
             classes = visual_recognition.classify(
                 images_file,
                 threshold='0.6',
         	classifier_ids='DefaultCustomModel_267056391').get_result()
         print(json.dumps(classes, indent=2))
         return (json.dumps(classes, indent=2))
-        return("accept")
 
     else:
         return("error")
