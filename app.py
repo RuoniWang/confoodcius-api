@@ -27,13 +27,13 @@ def upload():
 
         visual_recognition = VisualRecognitionV3(
             '2018-03-19',
-            iam_apikey='PDH9x2MwWgNl0BJfIuDO5VuOfNaqNAxyawnvFNc_YFNr')
+            iam_apikey='JnRKAJQI379qv2FyKeREhFi757w3hYHNy-dK5hPkyovc')
 
         with open('some_image.jpg', 'rb') as images_file:
             classes = visual_recognition.classify(
                 images_file,
                 threshold='0.6',
-        	classifier_ids='DefaultCustomModel_267056391').get_result()
+        	classifier_ids='Confoodcious_1721487998').get_result()
 
         return (json.dumps(classes))
 
