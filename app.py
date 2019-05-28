@@ -32,7 +32,7 @@ def upload():
         with open('some_image.jpg', 'rb') as images_file:
             classes = visual_recognition.classify(
                 images_file,
-                threshold='0.6',
+                threshold='0.55',
         	classifier_ids='Confoodcious_1721487998').get_result()
 
         return (json.dumps(classes))
